@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
 
-function App() {
+const App = () => {
+  const [name, setName] = React.useState();
+
+  const [error, setError] = React.useState();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const username = event.target[0].value;
+    setName(username);
+
+    if (username === "") setError("Do not leave field empty");
+  };
+
+  console.log(name);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Hello {name}
+      <form onSubmit={handleSubmit}>
+        <input name="username"></input>
+        <button>Submit</button>
+      </form>
+      {error && <p className="error">{error}</p>}
     </div>
   );
-}
+};
 
 export default App;
